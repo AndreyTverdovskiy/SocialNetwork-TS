@@ -10,9 +10,9 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
-import {AppStateType} from "./redux/redux-store";
+import {AppStateType, reduxStore} from "./redux/redux-store";
 import Preloader from "./components/common/Preloader/Preloader";
 
 
@@ -74,5 +74,14 @@ const mapStateToProps = (reduxStore: AppStateType):mapStateToPropsType => ({
 })
 
 
-export default  connect(mapStateToProps, {initializeApp})(App);
+// export default  connect(mapStateToProps, {initializeApp})(App);
+let AppContainer =  connect(mapStateToProps, {initializeApp})(App);
+
+const SamuraiJSApp = () => {
+    return <Provider store={reduxStore}>
+        <AppContainer/>
+    </Provider>
+}
+
+export default SamuraiJSApp
 
